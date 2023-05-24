@@ -13,10 +13,12 @@ spring:
     name: apigateway-service
   cloud:
     gateway:
+      default-filters:
+        - name: GlobalFilter
       routes:
         - id: user-service
-          uri: lb://USER-SERVICE
           predicates:
-            - Path=/user/**
-          #filters:
-            #- CustomFilter
+            - Path=/user-service/**
+          uri: lb://USER-SERVICE
+          filters:
+            - RewritePath=/first-service/(?<segment>.*), /$\{segment}
