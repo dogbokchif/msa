@@ -18,7 +18,5 @@ spring:
       routes:
         - id: user-service
           predicates:
-            - Path=/user-service/**
+            - Path=/user/**
           uri: lb://USER-SERVICE
-          filters:
-            - RewritePath=/first-service/(?<segment>.*), /$\{segment}
